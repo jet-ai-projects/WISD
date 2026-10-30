@@ -1,0 +1,9 @@
+include LICENSE NOTICE THIRD_PARTY_NOTICES.md README.md
+include requirements*.txt
+include train.py run_docker.sh
+recursive-include licenses *.txt
+recursive-include evaluation/math_tasks *.yaml
+recursive-include scripts *.sh
+recursive-include configs *.sh *.py
+recursive-include tools *.py
+recursive-include docs *.md

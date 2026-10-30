@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wisd"
+version = "0.1.0"
+description = "Self-distillation against a weakened model through quantization or pruning"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+dynamic = ["dependencies"]
+
+[project.urls]
+Repository = "https://github.com/gbcfchc/wisd-dev"
+Issues = "https://github.com/gbcfchc/wisd-dev/issues"
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+curation = ["vllm==0.8.5", "transformers==4.57.6", "huggingface-hub>=0.34"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+include = ["self_distillation*", "slime*", "slime_plugins*", "data_curation*", "configs.wisd*", "evaluation*"]
+exclude = ["tests*", "outputs*", "checkpoints*", "external*"]
+namespaces = true
+
+[tool.setuptools.package-data]
+evaluation = ["math_tasks/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["gpu: requires GPU training dependencies"]
+
+[tool.ruff]
+line-length = 119

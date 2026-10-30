@@ -1,0 +1,27 @@
+task: wisd_hmmt25
+dataset_path: MathArena/hmmt_feb_2025
+output_type: generate_until
+test_split: train
+doc_to_text: "Solve the following math problem step by step. The last line of your response should be of the form Answer: \\boxed{$Answer} where $Answer is the answer to the problem.\n\n{{problem}}\n\nRemember to put your answer on its own line after \"Answer:\"."
+doc_to_target: "{{answer}}"
+process_results: !function utils.process_results
+filter_list:
+  - name: identity
+    filter:
+      - function: custom
+        filter_fn: !function utils.identity_filter
+metric_list:
+  - metric: accuracy
+    aggregation: mean
+    higher_is_better: true
+generation_kwargs:
+  until: ["</s>", "<|im_end|>", "<|eot_id|>"]
+  do_sample: true
+  temperature: 0.6
+  top_p: 0.95
+  top_k: -1
+  max_gen_toks: 40960
+repeats: 32
+num_fewshot: 0
+metadata:
+  version: 1.0

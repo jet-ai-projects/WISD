@@ -1,0 +1,15 @@
+-r requirements.txt
+# Install compiled packages against the existing PyTorch/CUDA environment.
+sglang
+mbridge
+megatron-bridge @ git+https://github.com/fzyzcjy/Megatron-Bridge.git@dev_rl
+nvidia-modelopt[torch]>=0.37.0
+nvidia-ml-py
+torch-memory-saver
+transformer-engine[pytorch]
+flash-attn
+ring-flash-attn
+liger-kernel
+fastapi
+starlette
+uvicorn
